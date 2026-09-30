@@ -1,6 +1,6 @@
 ---
 import Botanical from './Botanical.astro';
-import { SITE } from '../data/site.js';
+import { SITE, u } from '../data/site.js';
 const { title = 'Lust auf eine Kostprobe?', text = 'Hast du Fragen oder möchtest du ein Tasting? Buche jetzt einen Termin mit unserem Team.' } = Astro.props;
 ---
 <section class="section">
@@ -12,7 +12,7 @@ const { title = 'Lust auf eine Kostprobe?', text = 'Hast du Fragen oder möchtes
       <p class="lead">{text}</p>
       <div class="btn-row">
         <a class="btn btn--honey" href={SITE.booking} rel="noopener">Termin buchen</a>
-        <a class="btn btn--ghost light" href="/kontakt">Offerte anfragen</a>
+        <a class="btn btn--ghost light" href={u("/kontakt")}>Offerte anfragen</a>
       </div>
     </div>
   </div>

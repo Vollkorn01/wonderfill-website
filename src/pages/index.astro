@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
 import Botanical from '../components/Botanical.astro';
-import { SITE, PARTNERS, FLAVORS, MORE_FLAVORS } from '../data/site.js';
+import { SITE, u, PARTNERS, FLAVORS, MORE_FLAVORS } from '../data/site.js';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -33,8 +33,8 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
           zuckerfrei, in der Schweiz hergestellt und genau auf deine Bedürfnisse zugeschnitten.
         </p>
         <div class="btn-row">
-          <a class="btn" href="/kontakt">Wonderfill anfragen</a>
-          <a class="btn btn--ghost" href="/getraenke">Zutaten entdecken</a>
+          <a class="btn" href={u("/kontakt")}>Wonderfill anfragen</a>
+          <a class="btn btn--ghost" href={u("/getraenke")}>Zutaten entdecken</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -113,7 +113,7 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
           <p>Vitamine, Elektrolyte oder Koffein – abgestimmt auf deinen Tag.</p>
         </li>
       </ol>
-      <div class="btn-row"><a class="btn btn--ghost" href="/station">Mehr über die Station</a></div>
+      <div class="btn-row"><a class="btn btn--ghost" href={u("/station")}>Mehr über die Station</a></div>
     </div>
   </section>
 
@@ -124,7 +124,7 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
         <p class="eyebrow">Employee Wellbeing</p>
         <h2>Gesunde Hydration für den <em>modernen</em> Arbeitsplatz</h2>
         <p class="lead">Gezielte Flüssigkeitszufuhr stärkt Wohlbefinden, fördert Teamleistung und unterstützt eine gesunde Unternehmenskultur.</p>
-        <div class="btn-row"><a class="btn" href="/kontakt">Offerte anfragen</a></div>
+        <div class="btn-row"><a class="btn" href={u("/kontakt")}>Offerte anfragen</a></div>
       </div>
       <ul class="benefits">
         <li>
@@ -186,7 +186,7 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
           inspiriert von Lucas Pendleralltag und Alex' Erlebnissen bei einem Beach CleanUp in Ghana.
         </p>
         <p>Bekannt aus «Die Höhle der Löwen Schweiz», wo wir Wonderfill live im Schweizer Fernsehen präsentiert haben.</p>
-        <a class="btn btn--ghost" href="/ueber-uns">Unsere Geschichte</a>
+        <a class="btn btn--ghost" href={u("/ueber-uns")}>Unsere Geschichte</a>
       </div>
     </div>
   </section>

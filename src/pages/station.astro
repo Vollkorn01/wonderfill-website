@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
-import { SITE } from '../data/site.js';
+import { SITE, u } from '../data/site.js';
 
 const features = [
   ['Perfekt zugeschnitten', 'Mit mehr als 180 Getränkeoptionen bekommst du genau das, was dein Körper braucht, um das Beste aus dir rauszuholen.'],
@@ -41,8 +41,8 @@ const jsonLd = {
     lead="Personalisierte, funktionale Getränke zum Nachfüllen – ohne Einwegverpackung. Nutze dein Glas oder deine Mehrwegflasche, stille deinen Durst und fühl dich grossartig."
   >
     <div class="btn-row">
-      <a class="btn" href="/kontakt">Jetzt auf Nachfüllen setzen</a>
-      <a class="btn btn--ghost" href="/getraenke">Unsere Getränke</a>
+      <a class="btn" href={u("/kontakt")}>Jetzt auf Nachfüllen setzen</a>
+      <a class="btn btn--ghost" href={u("/getraenke")}>Unsere Getränke</a>
     </div>
   </PageHero>
 
@@ -76,7 +76,7 @@ const jsonLd = {
           <div><dt>Tischversion</dt><dd>B 200 × T 250 × H 460 mm</dd></div>
           <div><dt>Stehende Version</dt><dd>B 600 × T 500 × H 1450 mm</dd></div>
         </dl>
-        <p><a href="/faq">Weitere Fragen zur Technik →</a></p>
+        <p><a href={u("/faq")}>Weitere Fragen zur Technik →</a></p>
       </div>
     </div>
   </section>

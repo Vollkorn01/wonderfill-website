@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import { u } from '../data/site.js';
 ---
 <Base title="Seite nicht gefunden" description="Diese Seite gibt es leider nicht." noindex>
   <PageHero eyebrow="404" title="Hier ist der <em>Becher</em> leer" lead="Die gesuchte Seite gibt es leider nicht (mehr).">
-    <div class="btn-row"><a class="btn" href="/">Zur Startseite</a></div>
+    <div class="btn-row"><a class="btn" href={u("/")}>Zur Startseite</a></div>
   </PageHero>
 </Base>

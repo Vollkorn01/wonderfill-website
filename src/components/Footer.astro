@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { SITE } from '../data/site.js';
+import { SITE, u } from '../data/site.js';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -15,17 +15,17 @@ const year = new Date().getFullYear();
         <div>
           <h2>Wonderfill</h2>
           <ul>
-            <li><a href="/station">Die Station</a></li>
-            <li><a href="/getraenke">Getränke & Zutaten</a></li>
-            <li><a href="/ueber-uns">Über uns</a></li>
+            <li><a href={u("/station")}>Die Station</a></li>
+            <li><a href={u("/getraenke")}>Getränke & Zutaten</a></li>
+            <li><a href={u("/ueber-uns")}>Über uns</a></li>
             <li><a href="https://www.wonderfill.ch/karriere-bei-wonderfill">Karriere</a></li>
           </ul>
         </div>
         <div>
           <h2>Hilfe</h2>
           <ul>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href="/kontakt">Kontakt</a></li>
+            <li><a href={u("/faq")}>FAQ</a></li>
+            <li><a href={u("/kontakt")}>Kontakt</a></li>
             <li><a href={SITE.booking} rel="noopener">Termin buchen</a></li>
           </ul>
         </div>

@@ -120,3 +120,8 @@ export const FAQS = [
     ],
   },
 ];
+
+// Prefix internal paths with the deploy base (e.g. /wonderfill-website on GitHub Pages).
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+export const u = (path) => BASE + path;
+export const stripBase = (path) => (BASE && path.startsWith(BASE) ? path.slice(BASE.length) : path) || '/';
