@@ -1,0 +1,19 @@
+---
+import Botanical from './Botanical.astro';
+const { eyebrow, title, lead } = Astro.props;
+---
+<section class="hero">
+  <Botanical class="sprig" />
+  <div class="wrap">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 set:html={title} />
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+<style>
+  .hero { position: relative; overflow: hidden; padding: clamp(3.5rem, 8vw, 6.5rem) 0 clamp(2.5rem, 5vw, 4rem); }
+  h1 { max-width: 16ch; }
+  .hero :global(.sprig) { position: absolute; right: max(2rem, 8vw); top: 1.5rem; width: clamp(6rem, 14vw, 11rem); color: var(--sage); opacity: 0.7; transform: rotate(12deg); }
+  @media (max-width: 640px) { .hero :global(.sprig) { opacity: 0.25; } }
+</style>

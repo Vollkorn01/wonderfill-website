@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site.js';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  about: { '@id': `${SITE.url}/#organization` },
+};
+---
+<Base
+  title="Kontakt & Offerte anfragen"
+  description="Offerte für die Wonderfill Getränkestation anfragen, Tasting buchen oder Fragen stellen – wir melden uns rasch bei dir. Aktiv in der Region Zürich."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Kontakt"
+    title="Lass uns über <em>dein</em> Nachfüll-Erlebnis sprechen"
+    lead="Ob Offerte, Tasting oder eine einfache Frage – wähle, was dir am besten passt."
+  />
+  <section class="section section--linen">
+    <div class="wrap grid grid-3">
+      <article class="card">
+        <h2>Termin buchen</h2>
+        <p>Such dir direkt einen Slot für ein unverbindliches Gespräch oder ein Tasting aus.</p>
+        <a class="btn" href={SITE.booking} rel="noopener">Zum Kalender</a>
+      </article>
+      <article class="card">
+        <h2>E-Mail</h2>
+        <p>Schreib uns, wie viele Personen an deinem Standort arbeiten – wir erstellen dir eine massgeschneiderte Offerte.</p>
+        <a class="btn btn--ghost" href={`mailto:${SITE.email}?subject=Offerte%20Wonderfill`}>{SITE.email}</a>
+      </article>
+      <article class="card">
+        <h2>Folge uns</h2>
+        <p>Neuigkeiten, neue Geschmacksrichtungen und Einblicke hinter die Kulissen.</p>
+        <ul>
+          <li><a href={SITE.social.linkedin} rel="noopener">LinkedIn</a></li>
+          <li><a href={SITE.social.instagram} rel="noopener">Instagram</a></li>
+          <li><a href={SITE.social.tiktok} rel="noopener">TikTok</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .card h2 { font-size: 1.5rem; }
+  .card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+  .card .btn { margin-top: 0.5rem; word-break: break-all; }
+</style>

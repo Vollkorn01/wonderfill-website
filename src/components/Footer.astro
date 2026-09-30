@@ -1,0 +1,65 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <Logo light />
+        <p>Natürliche, personalisierbare Getränke – frisch gezapft aus lokalem Wasser, ohne Einwegplastik.</p>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </div>
+      <nav aria-label="Footer">
+        <div>
+          <h2>Wonderfill</h2>
+          <ul>
+            <li><a href="/station">Die Station</a></li>
+            <li><a href="/getraenke">Getränke & Zutaten</a></li>
+            <li><a href="/ueber-uns">Über uns</a></li>
+            <li><a href="https://www.wonderfill.ch/karriere-bei-wonderfill">Karriere</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Hilfe</h2>
+          <ul>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
+            <li><a href={SITE.booking} rel="noopener">Termin buchen</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Rechtliches</h2>
+          <ul>
+            <li><a href="https://www.wonderfill.ch/privacy-policy">Datenschutz</a></li>
+            <li><a href="https://www.wonderfill.ch/cookies-policy">Cookie-Richtlinien</a></li>
+            <li><a href="https://www.wonderfill.ch/terms-and-condition">Geschäftsbedingungen</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="bottom">
+      <p>© {year} {SITE.legalName} · Zürich, Schweiz</p>
+      <ul class="social">
+        <li><a href={SITE.social.linkedin} rel="noopener">LinkedIn</a></li>
+        <li><a href={SITE.social.instagram} rel="noopener">Instagram</a></li>
+        <li><a href={SITE.social.tiktok} rel="noopener">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: #1a2b20; color: #cdd3c1; padding: 4.5rem 0 2rem; font-size: 0.95rem; }
+  .site-footer a { color: #e6e0cf; text-decoration: none; }
+  .site-footer a:hover { color: var(--honey); }
+  .top { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 3rem; }
+  .brand p { margin: 1rem 0; max-width: 22rem; }
+  nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 2rem; }
+  h2 { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+  .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid rgb(255 255 255 / 0.1); font-size: 0.85rem; }
+  .bottom p { margin: 0; }
+  .social { display: flex; gap: 1.25rem; }
+</style>

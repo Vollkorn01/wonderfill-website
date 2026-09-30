@@ -1,0 +1,58 @@
+---
+import Logo from './Logo.astro';
+import { NAV } from '../data/site.js';
+const path = Astro.url.pathname.replace(/\.html$/, '');
+---
+<div class="announce">
+  <a href="/getraenke#vitamin-mix"><span class="tag">Neu</span> Entdecke unseren neuen Vitamin Mix →</a>
+</div>
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" aria-label="Wonderfill – Startseite"><Logo /></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="visually-hidden">Menü</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav id="site-nav" aria-label="Hauptnavigation">
+      <ul>
+        {NAV.map((item) => (
+          <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="btn" href="/kontakt">Offerte anfragen</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.getElementById('site-nav');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('open', !open);
+  });
+</script>
+
+<style>
+  .announce { background: var(--forest); text-align: center; font-size: 0.875rem; padding: 0.5rem 1rem; }
+  .announce a { color: var(--cream); text-decoration: none; }
+  .announce a:hover { color: var(--honey); }
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgb(246 240 228 / 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgb(217 206 182 / 0.6); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
+  .bar > a { text-decoration: none; }
+  nav { display: flex; align-items: center; gap: 2rem; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.75rem; }
+  ul a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+  ul a:hover, ul a[aria-current='page'] { color: var(--moss); }
+  ul a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--honey); text-decoration-thickness: 2px; }
+  .menu-toggle { display: none; background: none; border: 0; color: var(--forest); padding: 0.5rem; cursor: pointer; }
+  @media (max-width: 900px) {
+    .menu-toggle { display: block; }
+    nav { display: none; position: absolute; inset: 100% 0 auto; flex-direction: column; align-items: stretch; gap: 1rem; padding: 1rem var(--gutter) 1.5rem; background: var(--cream); border-bottom: 1px solid var(--line); }
+    nav.open { display: flex; }
+    ul { flex-direction: column; gap: 0; }
+    ul a { display: block; padding: 0.75rem 0; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+    nav .btn { justify-content: center; }
+  }
+</style>

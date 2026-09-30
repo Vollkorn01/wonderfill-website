@@ -1,0 +1,14 @@
+---
+const { light = false } = Astro.props;
+---
+<span class:list={['logo', { light }]}>
+  <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+    <path d="M20 4c7 8.5 11 15 11 21a11 11 0 0 1-22 0c0-6 4-12.5 11-21z" fill="currentColor" />
+    <path d="M20 33V20m0 6 5-4m-5 8-4-3.5" stroke="var(--logo-vein)" stroke-width="2" fill="none" stroke-linecap="round" />
+  </svg>
+  <span>Wonderfill</span>
+</span>
+<style>
+  .logo { --logo-vein: var(--cream); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--forest); font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.02em; }
+  .logo.light { --logo-vein: var(--forest); color: var(--cream); }
+</style>

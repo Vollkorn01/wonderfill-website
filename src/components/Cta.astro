@@ -1,0 +1,32 @@
+---
+import Botanical from './Botanical.astro';
+import { SITE } from '../data/site.js';
+const { title = 'Lust auf eine Kostprobe?', text = 'Hast du Fragen oder möchtest du ein Tasting? Buche jetzt einen Termin mit unserem Team.' } = Astro.props;
+---
+<section class="section">
+  <div class="wrap">
+    <div class="cta">
+      <Botanical class="sprig l" />
+      <Botanical class="sprig r" />
+      <h2 set:html={title} />
+      <p class="lead">{text}</p>
+      <div class="btn-row">
+        <a class="btn btn--honey" href={SITE.booking} rel="noopener">Termin buchen</a>
+        <a class="btn btn--ghost light" href="/kontakt">Offerte anfragen</a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .cta { position: relative; overflow: hidden; text-align: center; background: var(--forest); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(3rem, 7vw, 5.5rem) var(--gutter); }
+  .cta h2 { color: var(--cream); position: relative; }
+  .cta h2 :global(em) { color: var(--honey); }
+  .cta .lead { color: #d5d9c7; margin-inline: auto; position: relative; }
+  .btn-row { justify-content: center; position: relative; }
+  .light { color: var(--cream); border-color: rgb(246 240 228 / 0.5); }
+  .light:hover { background: var(--cream); color: var(--forest); border-color: var(--cream); }
+  .cta :global(.sprig) { position: absolute; width: 7rem; color: var(--moss); opacity: 0.55; bottom: -1rem; }
+  .cta :global(.sprig.l) { left: 3%; transform: rotate(-14deg); }
+  .cta :global(.sprig.r) { right: 3%; transform: rotate(14deg) scaleX(-1); }
+  @media (max-width: 640px) { .cta :global(.sprig) { width: 4.5rem; opacity: 0.3; } }
+</style>

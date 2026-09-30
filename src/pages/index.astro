@@ -1,0 +1,262 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import Botanical from '../components/Botanical.astro';
+import { SITE, PARTNERS, FLAVORS, MORE_FLAVORS } from '../data/site.js';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Wonderfill Getränkestation',
+  brand: { '@type': 'Brand', name: 'Wonderfill' },
+  image: SITE.stationImage,
+  description:
+    'Nachhaltige Getränkestation für Büros und Hochschulen: natürliche, zuckerfreie Getränke aus lokalem Wasser – personalisierbar mit Vitaminen, Elektrolyten oder Koffein.',
+  manufacturer: { '@id': `${SITE.url}/#organization` },
+  countryOfOrigin: 'CH',
+};
+const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
+---
+<Base
+  title="Wonderfill – Natürliche Getränkestation für dein Büro | Zürich"
+  description="Ersetze PET-Flaschen durch frisch gezapfte, zuckerfreie Getränke aus natürlichen Zutaten. Die Wonderfill Getränkestation – entwickelt und gebaut in der Schweiz."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap grid grid-2">
+      <div>
+        <p class="eyebrow">Wonderfill Getränkestation</p>
+        <h1>Frisch gezapft. <em>Natürlich</em> gut.</h1>
+        <p class="lead">
+          Ersetze PET-Flaschen an deinem Standort durch funktionale Getränke aus natürlichen Zutaten –
+          zuckerfrei, in der Schweiz hergestellt und genau auf deine Bedürfnisse zugeschnitten.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/kontakt">Wonderfill anfragen</a>
+          <a class="btn btn--ghost" href="/getraenke">Zutaten entdecken</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="arch">
+          <img src={SITE.stationImage} alt="Die Wonderfill Getränkestation mit Touchscreen in einer Büroküche" width="640" height="800" fetchpriority="high" />
+        </div>
+        <ul class="chips" aria-label="Natürliche Zutaten">
+          {chips.map((c, i) => <li style={`--i:${i}`}>{c}</li>)}
+        </ul>
+        <Botanical class="hero-sprig" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section class="partners" aria-labelledby="partners-title">
+    <div class="wrap">
+      <h2 id="partners-title" class="partners-title">Setzen bereits aufs Nachfüllen</h2>
+      <ul>
+        {PARTNERS.map((p) => <li><img src={p.src} alt={p.name} loading="lazy" height="40" width="140" /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Ingredients -->
+  <section class="section">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">Unsere Zutaten</p>
+        <h2>Aus der Natur – <em>nicht</em> aus dem Labor</h2>
+        <p class="lead">
+          Echte Fruchtsäfte, natürliche Aromen und Kräuter statt Zucker und Zusatzstoffe.
+          Entwickelt und hergestellt in der Schweiz, mit kurzen Transportwegen.
+        </p>
+      </div>
+      <div class="flavors">
+        {FLAVORS.map((f) => (
+          <article class="flavor">
+            <span class="fruit" style={`--c:${f.color}`} aria-hidden="true"></span>
+            <h3>{f.name}</h3>
+            <p class="note">{f.note}</p>
+            {f.ingredients && <p class="ingr">{f.ingredients.join(' · ')}</p>}
+          </article>
+        ))}
+      </div>
+      <ul class="more" aria-label="Weitere Geschmacksrichtungen">
+        {MORE_FLAVORS.map((f) => <li><span style={`--c:${f.color}`} aria-hidden="true"></span>{f.name}</li>)}
+      </ul>
+      <dl class="facts">
+        <div><dt>0 g</dt><dd>Zucker pro 100 ml</dd></div>
+        <div><dt>180+</dt><dd>Kombinationen</dd></div>
+        <div><dt>100 %</dt><dd>Swiss made Aromen</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section section--linen">
+    <div class="wrap">
+      <p class="eyebrow">So funktioniert's</p>
+      <h2>Dein Getränk, <em>deine</em> Mischung</h2>
+      <ol class="steps grid grid-3">
+        <li class="card">
+          <span class="num">01</span>
+          <h3>Wasser wählen</h3>
+          <p>Lokales Leitungswasser – gefiltert, gekühlt, still oder sprudelnd.</p>
+        </li>
+        <li class="card">
+          <span class="num">02</span>
+          <h3>Geschmack aussuchen</h3>
+          <p>Von Orange über Ingwer bis Hibiskus: natürliche, zuckerfreie Aromen.</p>
+        </li>
+        <li class="card">
+          <span class="num">03</span>
+          <h3>Boost hinzufügen</h3>
+          <p>Vitamine, Elektrolyte oder Koffein – abgestimmt auf deinen Tag.</p>
+        </li>
+      </ol>
+      <div class="btn-row"><a class="btn btn--ghost" href="/station">Mehr über die Station</a></div>
+    </div>
+  </section>
+
+  <!-- Employee wellbeing -->
+  <section class="section">
+    <div class="wrap grid grid-2">
+      <div>
+        <p class="eyebrow">Employee Wellbeing</p>
+        <h2>Gesunde Hydration für den <em>modernen</em> Arbeitsplatz</h2>
+        <p class="lead">Gezielte Flüssigkeitszufuhr stärkt Wohlbefinden, fördert Teamleistung und unterstützt eine gesunde Unternehmenskultur.</p>
+        <div class="btn-row"><a class="btn" href="/kontakt">Offerte anfragen</a></div>
+      </div>
+      <ul class="benefits">
+        <li>
+          <h3>Besseres Wohlbefinden</h3>
+          <p>Täglich 2–3 Liter Wasser steigern Energie, Fokus und kognitive Leistung.</p>
+        </li>
+        <li>
+          <h3>Attraktiver Arbeitsplatz</h3>
+          <p>Eine moderne Getränkestation wertet den Arbeitsplatz auf und fördert gesunde Routinen im Alltag.</p>
+        </li>
+        <li>
+          <h3>Mehr Zufriedenheit im Team</h3>
+          <p>Gesundheitsfördernde Angebote zeigen Wertschätzung – und stärken die Mitarbeiterbindung langfristig.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="section section--linen">
+    <div class="wrap">
+      <figure class="quote">
+        <blockquote>
+          «Wir finden die Wonderfill Station fantastisch. Nachdem wir sie im letzten Jahr einen Monat lang
+          ausprobiert hatten, beschlossen wir, in unserem Sozialbereich eine permanente Wonderfill Station zu
+          installieren. Das hilft uns nicht nur, eine grosse Menge an PET zu sparen, sondern bietet unseren
+          Mitarbeitern auch eine gesündere Alternative zu herkömmlichen Softdrinks.»
+        </blockquote>
+        <figcaption><strong>Jennifer Grob</strong><span>Senior Operations Specialist & Executive Assistant, Boston Consulting Group</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <section class="section section--forest impact">
+    <Botanical class="impact-sprig" />
+    <div class="wrap">
+      <p class="eyebrow">Refill & Hydrate</p>
+      <h2>Gut für dich. <em>Gut</em> für den Wald vor der Tür.</h2>
+      <p class="lead">Nachhaltig und kosteneffizient: Gemischt wird vor Ort, mit lokalem Wasser – ohne Einwegflaschen, ohne unnötige Transporte.</p>
+      <dl class="stats">
+        <div><dt>98 %</dt><dd>weniger Plastikabfall als mit Einwegflaschen</dd></div>
+        <div><dt>49 %</dt><dd>weniger CO₂ gemäss Ökobilanz der ZHAW</dd></div>
+        <div><dt>50 %</dt><dd>günstiger als herkömmliche PET-Flaschen</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section">
+    <div class="wrap grid grid-2">
+      <div>
+        <p class="eyebrow">Unsere Mission</p>
+        <h2>Eine Milliarde PET-Flaschen <em>weniger</em></h2>
+      </div>
+      <div>
+        <p class="lead">
+          Bei einem Familienessen entstand zwischen Luca und Alex die Idee, Einwegplastik den Kampf anzusagen –
+          inspiriert von Lucas Pendleralltag und Alex' Erlebnissen bei einem Beach CleanUp in Ghana.
+        </p>
+        <p>Bekannt aus «Die Höhle der Löwen Schweiz», wo wir Wonderfill live im Schweizer Fernsehen präsentiert haben.</p>
+        <a class="btn btn--ghost" href="/ueber-uns">Unsere Geschichte</a>
+      </div>
+    </div>
+  </section>
+
+  <Cta title="Probier's aus – <em>mit einer Tasting Box</em>" text="Möchtest du unsere Geschmacksrichtungen testen oder hast du Fragen zur Station? Buche jetzt einen Termin." />
+</Base>
+
+<style>
+  .hero { padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem); }
+  .hero h1 { max-width: 11ch; }
+  .hero-visual { position: relative; max-width: 30rem; justify-self: center; width: 100%; }
+  .arch { aspect-ratio: 4 / 5; border-radius: 999px 999px var(--radius-lg) var(--radius-lg); overflow: hidden; background: linear-gradient(160deg, var(--sage), var(--moss)); box-shadow: var(--shadow); }
+  .arch img { width: 100%; height: 100%; object-fit: cover; }
+  .chips { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
+  .chips li {
+    position: absolute; padding: 0.45rem 0.9rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+    background: var(--paper); color: var(--forest); box-shadow: var(--shadow); white-space: nowrap;
+    animation: float 6s ease-in-out infinite; animation-delay: calc(var(--i) * -1.2s);
+  }
+  .chips li:nth-child(1) { top: 12%; left: -6%; }
+  .chips li:nth-child(2) { top: 30%; right: -6%; }
+  .chips li:nth-child(3) { top: 55%; left: -9%; }
+  .chips li:nth-child(4) { bottom: 16%; right: -4%; }
+  .chips li:nth-child(5) { bottom: 3%; left: 12%; }
+  @media (max-width: 640px) { .chips li:nth-child(1) { left: 0; } .chips li:nth-child(3) { left: 0; } .chips li:nth-child(2), .chips li:nth-child(4) { right: 0; } }
+  @keyframes float { 50% { transform: translateY(-8px); } }
+  @media (prefers-reduced-motion: reduce) { .chips li { animation: none; } }
+  .hero-visual :global(.hero-sprig) { position: absolute; width: 5.5rem; left: -3.5rem; bottom: -2rem; color: var(--moss); transform: rotate(-18deg); }
+  @media (max-width: 640px) { .hero-visual :global(.hero-sprig) { display: none; } }
+
+  .partners { padding: 2.5rem 0; border-block: 1px solid var(--line); }
+  .partners-title { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); text-align: center; margin-bottom: 1.5rem; }
+  .partners ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(1.5rem, 5vw, 3.5rem); }
+  .partners img { height: 2.25rem; width: auto; object-fit: contain; filter: grayscale(1) sepia(0.5) opacity(0.7); transition: filter 0.3s; }
+  .partners img:hover { filter: none; }
+
+  .flavors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .flavor { text-align: center; padding: 2rem 1.5rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+  .fruit { display: block; width: 6.5rem; height: 6.5rem; margin: 0 auto 1.25rem; border-radius: 50%; position: relative;
+    background: radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--c), white 45%), var(--c) 60%, color-mix(in oklab, var(--c), black 20%)); }
+  .fruit::after { content: ''; position: absolute; width: 1.9rem; height: 1rem; top: -0.3rem; left: 52%; background: var(--moss); border-radius: 0 100% 0 100%; transform: rotate(-20deg); }
+  .flavor h3 { margin-bottom: 0.2rem; }
+  .note { color: var(--moss); font-style: italic; font-family: var(--font-display); margin-bottom: 0.75rem; }
+  .ingr { font-size: 0.875rem; color: var(--ink-soft); margin: 0; }
+  .more { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+  .more li { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.9rem; background: var(--paper); }
+  .more span { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--c); }
+  .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(2rem, 6vw, 5rem); margin: 3.5rem 0 0; }
+  .facts div { text-align: center; }
+  .facts dt { font-family: var(--font-display); font-size: 2.5rem; color: var(--forest); line-height: 1; }
+  .facts dd { margin: 0.4rem 0 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .steps { list-style: none; padding: 0; margin: 2.5rem 0 0; }
+  .num { font-family: var(--font-display); font-size: 2.25rem; color: var(--honey); display: block; margin-bottom: 0.75rem; }
+
+  .benefits { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  .benefits li { padding: 1.5rem 1.5rem 1.5rem 4rem; position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+  .benefits li::before { content: ''; position: absolute; left: 1.5rem; top: 1.75rem; width: 1.3rem; height: 0.8rem; background: var(--moss); border-radius: 0 100% 0 100%; transform: rotate(-30deg); }
+  .benefits h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+  .benefits p { margin: 0; color: var(--ink-soft); }
+
+  .quote { margin: 0 auto; max-width: 52rem; text-align: center; }
+  .quote blockquote { margin: 0 0 2rem; font-family: var(--font-display); font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.45; color: var(--forest); }
+  .quote figcaption { display: grid; gap: 0.2rem; color: var(--ink-soft); font-size: 0.95rem; }
+  .quote strong { color: var(--ink); }
+
+  .impact { position: relative; overflow: hidden; }
+  .impact :global(.impact-sprig) { position: absolute; right: -1rem; bottom: -2rem; width: 14rem; color: var(--moss); opacity: 0.4; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 2rem; margin: 3.5rem 0 0; position: relative; }
+  .stats div { border-top: 1px solid rgb(246 240 228 / 0.25); padding-top: 1.25rem; }
+  .stats dt { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1; color: var(--honey); }
+  .stats dd { margin: 0.6rem 0 0; color: #d5d9c7; }
+</style>

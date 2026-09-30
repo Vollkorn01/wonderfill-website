@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../data/site.js';
+
+const team = [
+  { name: 'Alexander Pfyffer', role: 'Co-Founder & CEO', tag: 'Der Innovator', bio: 'Recycling-Fan und Sprudelwasser-Enthusiast mit einem Master in BWL. In seiner Freizeit bringt er sich das Programmieren bei – natürlich immer mit einem sprudelnden Glas Wasser in der Hand.' },
+  { name: 'Luca Pfyffer', role: 'Co-Founder & CTO', tag: 'Der Allrounder', bio: 'Als ehemaliger Profischwimmer ist Luca schon für die Schweiz durchs Wasser geschnellt. Mit einem BSc. in Maschinenbau schliesst er nun sein Masterstudium mit Schwerpunkt Energie & Umwelt ab.' },
+];
+const news = [
+  { title: "Getränkespender Fountain bei 'Die Höhle der Löwen Schweiz'", date: '2023-10-22', text: 'Wie war der Auftritt für uns? Was haben wir mitgenommen? Alles über unsere Teilnahme und die Wonderfill Station.' },
+  { title: "Grosse Neuigkeiten: Wir sind bei 'Die Höhle der Löwen Schweiz'!", date: '2023-10-01', text: 'Wir durften unser Produkt vor einer prominenten Investorenrunde präsentieren – live im Schweizer Fernsehen.', href: 'https://www.wonderfill.ch/blog-posts/grosse-neuigkeiten-wir-sind-bei-die-hohle-der-lowen-schweiz' },
+  { title: 'Wir haben unseren Namen zu Wonderfill geändert', date: '2023-09-15', text: 'Aus Fountain wird Wonderfill – um unsere Mission, noch wundervollere Getränke und Erlebnisse zu schaffen, besser widerzuspiegeln.' },
+];
+const fmt = (d) => new Date(d).toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  about: { '@id': `${SITE.url}/#organization` },
+  mainEntity: {
+    '@id': `${SITE.url}/#organization`,
+    founder: team.map((t) => ({ '@type': 'Person', name: t.name, jobTitle: t.role })),
+  },
+};
+---
+<Base
+  title="Über uns – Unsere Mission für nachhaltige Erfrischung"
+  description="Das Team hinter Wonderfill: ein Zürcher Startup der Cousins Alexander und Luca Pfyffer mit der Mission, eine Milliarde PET-Flaschen einzusparen."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Das Wonderfill Team"
+    title="Die <em>Durstlöscher</em> hinter Wonderfill"
+    lead="Hier erfährst du mehr über unser Team, unsere Geschichte und unsere Mission."
+  />
+
+  <section class="section section--linen">
+    <div class="wrap grid grid-2 story">
+      <div>
+        <p class="eyebrow">Unsere Story</p>
+        <h2>Warum zur PET-Flasche greifen, wenn die <em>Mehrwegflasche</em> dabei ist?</h2>
+      </div>
+      <div>
+        <p>Die Idee, gemeinsam ein Unternehmen gegen die Unmengen an Einwegplastik zu gründen, kam bei einem Familienessen auf. Luca erzählte Alex von seinem Problem beim Pendeln zur Uni: Hatte er Lust auf etwas anderes als Wasser, kam er nicht um den Kauf einer PET-Flasche herum – obwohl er seine wiederverwendbare Flasche dabei hatte.</p>
+        <p>Kurz danach reiste Alex nach Ghana und erkannte bei einem Beach CleanUp das volle Ausmass des Problems. Zurück in der Schweiz starteten wir das Projekt «Wonderfill» und bauten unseren ersten Prototypen. Durch Testkunden zeigte sich schnell: Wir sind nicht die Einzigen, die auf kreislaufbasierte Lösungen setzen wollen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Das Team</p>
+      <h2>Zwei Cousins aus <em>Zürich</em></h2>
+      <div class="grid grid-2 team">
+        {team.map((m) => (
+          <article class="card member">
+            <span class="initials" aria-hidden="true">{m.name.split(' ').map((n) => n[0]).join('')}</span>
+            <p class="tagline">{m.tag}</p>
+            <h3>{m.name}</h3>
+            <p class="role">{m.role}</p>
+            <p>{m.bio}</p>
+          </article>
+        ))}
+      </div>
+      <div class="join card">
+        <div>
+          <h3>Lust, bei Wonderfill mitzuwirken?</h3>
+          <p>Willst du auch lokales Wasser fördern und Einwegplastik verhindern? Kontaktiere uns ungeniert :-)</p>
+        </div>
+        <a class="btn" href="https://www.wonderfill.ch/karriere-bei-wonderfill">Jetzt bewerben</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <p class="eyebrow">News</p>
+      <h2>Neues von Wonderfill</h2>
+      <div class="grid grid-3 news">
+        {news.map((n) => (
+          <article class="card">
+            <time datetime={n.date}>{fmt(n.date)}</time>
+            <h3>{n.href ? <a href={n.href}>{n.title}</a> : n.title}</h3>
+            <p>{n.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>
+
+<style>
+  .story { align-items: start; }
+  .team { margin-top: 2.5rem; align-items: stretch; }
+  .initials { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: var(--moss); color: var(--cream); font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .tagline { font-family: var(--font-display); font-style: italic; color: var(--clay); margin-bottom: 0.25rem; }
+  .member h3 { margin-bottom: 0.1rem; }
+  .role { font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
+  .join { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: 1.75rem; background: var(--linen); }
+  .join p { margin: 0; }
+  .news { margin-top: 2.5rem; }
+  time { font-size: 0.85rem; color: var(--moss); font-weight: 600; }
+  .news h3 { font-size: 1.2rem; margin-top: 0.5rem; }
+  .news h3 a { color: inherit; }
+</style>

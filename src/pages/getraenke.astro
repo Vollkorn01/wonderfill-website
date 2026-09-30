@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+import { SITE, FLAVORS, MORE_FLAVORS, BOOSTS, VITAMINS } from '../data/site.js';
+
+const all = [...FLAVORS, ...MORE_FLAVORS];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Wonderfill Geschmacksrichtungen',
+  itemListElement: all.map((f, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: `Wonderfill ${f.name}`,
+      brand: { '@type': 'Brand', name: 'Wonderfill' },
+      description: 'Natürliches, zuckerfreies Getränk aus der Wonderfill Getränkestation, hergestellt in der Schweiz.',
+      ...(f.ingredients ? { material: f.ingredients.join(', ') } : {}),
+    },
+  })),
+};
+---
+<Base
+  title="Natürliche, zuckerfreie Getränke & Zutaten"
+  description="Orange, Ingwer, Himbeere, Holunderblüte, Hibiskus und mehr: natürliche, zuckerfreie Getränke aus der Schweiz – mit Vitamin-, Elektrolyt- oder Koffein-Boost."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Wonderfill Getränke"
+    title="Natürliche, funktionale Getränke <em>aus der Schweiz</em>"
+    lead="Wir entwickeln natürliche, zuckerfreie Getränke mit individuell wählbaren Aromen und aktiven Inhaltsstoffen. Wonderfill tut dir gut – und unserem Planeten auch."
+  >
+    <div class="btn-row"><a class="btn" href={SITE.booking} rel="noopener">Tasting buchen</a></div>
+  </PageHero>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <p class="eyebrow">Zuckerfrei & natürlich</p>
+      <h2>Unsere Geschmacksrichtungen</h2>
+      <p class="lead">Echte Zutaten, keine Kompromisse – unsere Orange zum Beispiel hat 0 g Zucker und 0 kcal pro 100 ml.</p>
+
+      <div class="flavor-grid">
+        {FLAVORS.map((f) => (
+          <article class="card flavor">
+            <span class="swatch" style={`--c:${f.color}`} aria-hidden="true"></span>
+            <div>
+              <h3>{f.name}</h3>
+              <p class="note">{f.note}</p>
+              {f.ingredients && (
+                <>
+                  <h4>Zutaten</h4>
+                  <p>{f.ingredients.join(', ')}</p>
+                  <table>
+                <caption class="visually-hidden">Nährwerte {f.name} pro 100 ml</caption>
+                <tbody>
+                  <tr><th scope="row">Zucker</th><td>0 g</td></tr>
+                  <tr><th scope="row">Kalorien</th><td>0 kcal</td></tr>
+                  <tr><th scope="row">Fett</th><td>0 g</td></tr>
+                  <tr><th scope="row">Salz</th><td>0 g</td></tr>
+                </tbody>
+              </table>
+                </>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <h3 class="more-title">Weitere natürliche Geschmacksrichtungen</h3>
+      <ul class="more">
+        {MORE_FLAVORS.map((f) => (
+          <li><span style={`--c:${f.color}`} aria-hidden="true"></span>{f.name}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Funktionale Zusätze</p>
+      <h2>Boosts für dein <em>Wohlbefinden</em></h2>
+      <p class="lead">Gezielte Unterstützung für Energie, Regeneration und Immunsystem.</p>
+      <div class="grid grid-3 boosts">
+        {BOOSTS.map((b) => (
+          <article class="card" id={b.sub === 'Vitamin Mix' ? 'vitamin-mix' : undefined}>
+            <p class="sub">{b.sub} {b.isNew && <span class="tag">Neu</span>}</p>
+            <h3>{b.name}</h3>
+            <p>{b.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <details class="vitamins">
+        <summary>Was steckt im Vitamin Mix?</summary>
+        <dl>
+          {VITAMINS.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+        </dl>
+      </details>
+    </div>
+  </section>
+
+  <Cta title="Bestell deine <em>Tasting Box</em>" text="Möchtest du unsere Geschmacksrichtungen testen? Melde dich – wir schicken dir eine Tasting Box oder kommen für ein Tasting vorbei." />
+</Base>
+
+<style>
+  .flavor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .flavor { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: start; }
+  .swatch { width: 4rem; height: 4rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--c), white 45%), var(--c) 60%, color-mix(in oklab, var(--c), black 20%)); }
+  .note { font-family: var(--font-display); font-style: italic; color: var(--moss); }
+  h4 { font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 0.25rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem; }
+  th, td { padding: 0.4rem 0; border-bottom: 1px dashed var(--line); text-align: left; font-weight: 400; }
+  td { text-align: right; font-weight: 600; color: var(--forest); }
+  .more-title { margin-top: 3.5rem; }
+  .more { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .more li { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
+  .more span { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--c); }
+  .boosts { margin-top: 2.5rem; }
+  .sub { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss); font-weight: 600; margin-bottom: 0.4rem; display: flex; gap: 0.5rem; align-items: center; }
+  #vitamin-mix { scroll-margin-top: 6rem; border-color: var(--honey); }
+  .vitamins { margin-top: 2rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+  .vitamins summary { cursor: pointer; font-weight: 600; color: var(--forest); }
+  .vitamins dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem 2rem; margin: 1.25rem 0 0; }
+  .vitamins dt { font-weight: 600; }
+  .vitamins dd { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+</style>

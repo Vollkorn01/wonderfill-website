@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../data/site.js';
+
+const features = [
+  ['Perfekt zugeschnitten', 'Mit mehr als 180 Getränkeoptionen bekommst du genau das, was dein Körper braucht, um das Beste aus dir rauszuholen.'],
+  ['Nachhaltig', 'Kein Plastikabfall und lokales Wasser statt Transport: So machst du mit jedem Schluck einen Unterschied.'],
+  ['Einfache Wartung', 'Unsere IoT-Plattform sorgt für zeitnahe Benachrichtigungen und klare Handlungsanweisungen – damit du dich auf Wichtigeres konzentrieren kannst.'],
+  ['Schweizer Qualität', 'Unser Spender wurde komplett in der Schweiz entwickelt und gebaut. Das hält Transportwege kurz und Qualitätsstandards hoch.'],
+  ['Kommunikativ', 'Das Display dient als Kommunikationsfläche: Feedback einholen, Events bewerben oder über beliebige Themen informieren.'],
+  ['Flexibel', 'Integriert in bestehende Infrastruktur oder als Stand-alone-Version – die Station und die Getränkeauswahl passen sich dir an.'],
+];
+const reqs = [
+  'Wasserversorgung (⅜" Aussendurchmesser)',
+  'Standard-220-V-Steckdose',
+  'Standard Schweizer/Europäischer Thekenaufbau',
+  'Zentrierter Ausschnitt in der Theke über dem Kühler (Vorlage wird bereitgestellt)',
+  'WLAN (wenn möglich)',
+  'Abwasseranschluss (optional)',
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Wonderfill Getränkestation',
+  brand: { '@type': 'Brand', name: 'Wonderfill' },
+  image: SITE.stationImage,
+  countryOfOrigin: 'CH',
+  description: 'Refill-Station für personalisierte, funktionale Getränke ohne Einwegverpackung. Tischversion 200 × 250 × 460 mm, stehende Version 600 × 500 × 1450 mm.',
+};
+---
+<Base
+  title="Die Getränkestation – Refill-Point für Büro & Campus"
+  description="Die Wonderfill Getränkestation: personalisierte, funktionale Getränke zum Nachfüllen – ohne Einwegverpackung. In der Schweiz entwickelt, IoT-gewartet, flexibel installierbar."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Wonderfill Getränkestation"
+    title="Für eine Zukunft, in der <em>Nachfüllen</em> Standard ist"
+    lead="Personalisierte, funktionale Getränke zum Nachfüllen – ohne Einwegverpackung. Nutze dein Glas oder deine Mehrwegflasche, stille deinen Durst und fühl dich grossartig."
+  >
+    <div class="btn-row">
+      <a class="btn" href="/kontakt">Jetzt auf Nachfüllen setzen</a>
+      <a class="btn btn--ghost" href="/getraenke">Unsere Getränke</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <p class="eyebrow">Merkmale</p>
+      <h2>Durchdacht bis <em>zum letzten Tropfen</em></h2>
+      <div class="grid grid-3 features">
+        {features.map(([t, d], i) => (
+          <article class="card">
+            <span class="icon" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid-2 install">
+      <div class="photo">
+        <img src={SITE.stationImage} alt="Wonderfill Getränkestation installiert auf einer Küchentheke" loading="lazy" width="640" height="800" />
+      </div>
+      <div>
+        <p class="eyebrow">Installation</p>
+        <h2>Was es braucht</h2>
+        <ul class="checks">{reqs.map((r) => <li>{r}</li>)}</ul>
+        <h3>Abmessungen</h3>
+        <dl class="dims">
+          <div><dt>Tischversion</dt><dd>B 200 × T 250 × H 460 mm</dd></div>
+          <div><dt>Stehende Version</dt><dd>B 600 × T 500 × H 1450 mm</dd></div>
+        </dl>
+        <p><a href="/faq">Weitere Fragen zur Technik →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <Cta title="Möchtest du <em>mehr erfahren?</em>" text="Hast du Fragen zur Installation oder zum Abo? Buche jetzt einen Termin." />
+</Base>
+
+<style>
+  .features { margin-top: 2.5rem; }
+  .icon { font-family: var(--font-display); font-size: 1rem; color: var(--moss) !important; }
+  .photo { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 5; background: var(--sage); box-shadow: var(--shadow); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .install { align-items: start; }
+  .checks { list-style: none; padding: 0; margin: 0 0 2rem; display: grid; gap: 0.6rem; }
+  .checks li { padding-left: 2rem; position: relative; }
+  .checks li::before { content: ''; position: absolute; left: 0; top: 0.45rem; width: 1rem; height: 0.6rem; background: var(--moss); border-radius: 0 100% 0 100%; transform: rotate(-30deg); }
+  .dims { margin: 0 0 1.5rem; display: grid; gap: 0.75rem; }
+  .dims div { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--line); }
+  .dims dt { font-weight: 600; }
+  .dims dd { margin: 0; color: var(--ink-soft); }
+</style>

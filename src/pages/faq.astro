@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+import { FAQS } from '../data/site.js';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.flatMap((g) =>
+    g.items.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  ),
+};
+---
+<Base
+  title="FAQ – Fragen & Antworten zur Getränkestation"
+  description="Alles zur Wonderfill Getränkestation: Kosten, Installation, Wartung, Geschmacksrichtungen, Zucker und Nachhaltigkeit – die häufigsten Fragen beantwortet."
+  jsonLd={jsonLd}
+>
+  <PageHero eyebrow="Hilfe" title="Fragen & <em>Antworten</em>" lead="Alles zum Produkt und unserem Angebot." />
+
+  <section class="section section--linen">
+    <div class="wrap faq">
+      {FAQS.map((g) => (
+        <section aria-labelledby={`g-${g.group}`}>
+          <h2 id={`g-${g.group}`}>{g.group}</h2>
+          {g.items.map(([q, a]) => (
+            <details>
+              <summary><h3>{q}</h3></summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <Cta title="Noch <em>Fragen?</em>" text="Wir helfen dir gerne weiter – per E-Mail oder in einem persönlichen Gespräch." />
+</Base>
+
+<style>
+  .faq { max-width: 52rem; display: grid; gap: 3rem; }
+  .faq h2 { font-size: 1.75rem; }
+  details { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 0.75rem; }
+  summary { list-style: none; cursor: pointer; padding: 1.1rem 3.5rem 1.1rem 1.5rem; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 1.5rem; top: 50%; translate: 0 -50%; font-size: 1.5rem; color: var(--moss); transition: rotate 0.2s; }
+  details[open] summary::after { rotate: 45deg; }
+  summary h3 { font-family: var(--font-body); font-size: 1.02rem; font-weight: 600; margin: 0; color: var(--ink); line-height: 1.4; }
+  details p { padding: 0 1.5rem 1.25rem; margin: 0; color: var(--ink-soft); }
+</style>
