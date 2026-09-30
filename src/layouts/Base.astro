@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE, u, stripBase } from '../data/site.js';
+import { SITE, u, stripBase, THEME } from '../data/site.js';
 
 interface Props {
   title: string;
@@ -38,10 +38,14 @@ const website = {
   inLanguage: SITE.lang,
   publisher: { '@id': `${SITE.url}/#organization` },
 };
+// Preview builds (GitHub Pages) show a switch between the two designs.
+const previewRoot = import.meta.env.PUBLIC_PREVIEW_ROOT;
+const here = stripBase(Astro.url.pathname).replace(/(index)?\.html$/, '') || '/';
+const switchTo = (theme) => previewRoot + (theme === 'classic' ? '/klassisch' : '') + (here === '/' ? '/' : here);
 const schemas = [organization, website, ...(jsonLd ? [jsonLd].flat() : [])];
 ---
 <!doctype html>
-<html lang={SITE.lang}>
+<html lang={SITE.lang} data-theme={THEME}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,5 +81,19 @@ const schemas = [organization, website, ...(jsonLd ? [jsonLd].flat() : [])];
       <slot />
     </main>
     <Footer />
+    {previewRoot && (
+      <nav class="theme-switch" aria-label="Design-Variante">
+        <span>Design</span>
+        <a href={switchTo('natur')} aria-current={THEME === 'natur' ? 'true' : undefined}>Natur</a>
+        <a href={switchTo('classic')} aria-current={THEME === 'classic' ? 'true' : undefined}>Klassisch</a>
+      </nav>
+    )}
   </body>
 </html>
+
+<style>
+  .theme-switch { position: fixed; left: 50%; bottom: 1rem; translate: -50% 0; z-index: 90; display: flex; align-items: center; gap: 0.25rem; padding: 0.3rem; border-radius: 999px; background: #111; color: #fff; font: 600 0.8rem/1 system-ui, sans-serif; box-shadow: 0 8px 24px rgb(0 0 0 / 0.25); }
+  .theme-switch span { padding: 0 0.6rem; opacity: 0.6; }
+  .theme-switch a { color: #fff; text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 999px; }
+  .theme-switch a[aria-current] { background: #fff; color: #111; }
+</style>

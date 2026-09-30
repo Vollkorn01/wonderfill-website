@@ -125,3 +125,7 @@ export const FAQS = [
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const u = (path) => BASE + path;
 export const stripBase = (path) => (BASE && path.startsWith(BASE) ? path.slice(BASE.length) : path) || '/';
+
+// 'natur' (warm forest design) or 'classic' (close to the current site).
+export const THEME = import.meta.env.PUBLIC_THEME === 'classic' ? 'classic' : 'natur';
+export const LOGO_IMG = 'https://cdn.prod.website-files.com/6788d058c8c090e82d1ab1dd/679a113dbc1882377919c2e7_logo%2520(5)-p-500.png';

@@ -1,5 +1,8 @@
 @import '@fontsource-variable/fraunces';
 @import '@fontsource-variable/inter';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/800.css';
 
 :root {
   --forest: #23392a;
@@ -15,6 +18,14 @@
   --ink: #1f2a20;
   --ink-soft: #4a5446;
   --line: #d9ceb6;
+  --on-dark-soft: #d5d9c7;
+  --header-bg: rgb(246 240 228 / 0.88);
+  --footer-bg: #1a2b20;
+  --footer-text: #cdd3c1;
+  --footer-link: #e6e0cf;
+  --btn-bg: var(--forest);
+  --btn-text: var(--cream);
+  --btn-hover: var(--moss);
 
   --font-display: 'Fraunces Variable', Georgia, serif;
   --font-body: 'Inter Variable', system-ui, -apple-system, sans-serif;
@@ -80,7 +91,7 @@ p { margin: 0 0 1em; }
 .section--forest .eyebrow { color: var(--sage); }
 
 .lead { font-size: clamp(1.1rem, 1.6vw, 1.25rem); color: var(--ink-soft); max-width: 38rem; }
-.section--forest .lead { color: #d5d9c7; }
+.section--forest .lead { color: var(--on-dark-soft); }
 .center { text-align: center; }
 .center .lead { margin-inline: auto; }
 
@@ -88,11 +99,11 @@ p { margin: 0 0 1em; }
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.85rem 1.5rem; border-radius: 999px;
   font-weight: 600; font-size: 0.975rem; text-decoration: none;
-  background: var(--forest); color: var(--cream);
-  border: 1.5px solid var(--forest);
+  background: var(--btn-bg); color: var(--btn-text);
+  border: 1.5px solid var(--btn-bg);
   transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
-.btn:hover { background: var(--moss); border-color: var(--moss); color: var(--cream); transform: translateY(-1px); }
+.btn:hover { background: var(--btn-hover); border-color: var(--btn-hover); color: var(--btn-text); transform: translateY(-1px); }
 .btn--ghost { background: transparent; color: var(--forest); }
 .btn--ghost:hover { background: var(--forest); color: var(--cream); }
 .btn--honey { background: var(--honey); border-color: var(--honey); color: var(--ink); }
@@ -130,3 +141,55 @@ p { margin: 0 0 1em; }
 .skip-link { position: absolute; left: 1rem; top: -3rem; z-index: 100; background: var(--forest); color: var(--cream); padding: 0.5rem 1rem; border-radius: 0.5rem; }
 .skip-link:focus { top: 1rem; }
 :focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+
+/* ------------------------------------------------------------------
+   Classic theme: close to the current wonderfill.ch look
+   (Poppins, navy + teal, pastel gradient words), with better contrast.
+   ------------------------------------------------------------------ */
+[data-theme='classic'] {
+  --forest: #052256;      /* navy: headings, dark sections */
+  --forest-2: #0b3a7a;
+  --moss: #177a87;        /* teal, darkened for readable text */
+  --sage: #4fbcc9;        /* brand teal */
+  --bark: #052256;
+  --honey: #fede6d;       /* "NEW" yellow */
+  --clay: #7a4fd6;
+  --cream: #ffffff;
+  --linen: #f0f9fa;       /* light aqua sections */
+  --paper: #ffffff;
+  --ink: #052256;
+  --ink-soft: #52627c;
+  --line: #dcebee;
+  --on-dark-soft: #c9d4e6;
+  --header-bg: rgb(255 255 255 / 0.9);
+  --footer-bg: #041a42;
+  --footer-text: #b9c6dc;
+  --footer-link: #ffffff;
+  /* Original uses white on teal (2.3:1); navy on teal reads far better. */
+  --btn-bg: #4fbcc9;
+  --btn-text: #052256;
+  --btn-hover: #7fd3dc;
+
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+  --shadow: 0 1px 2px rgb(5 34 86 / 0.05), 0 16px 40px -16px rgb(5 34 86 / 0.25);
+  --grad-warm: linear-gradient(90deg, #ef8fb4 0%, #f2a978 45%, #e9bd2c 95%);
+  --grad-cool: linear-gradient(90deg, #8a4dff 0%, #4f8ff7 50%, #1fc1e0 100%);
+}
+[data-theme='classic'] body { background-image: none; font-size: 1rem; line-height: 1.7; }
+[data-theme='classic'] :is(h1, h2, h3, h4) { font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+[data-theme='classic'] :is(h1, h2) em {
+  font-style: normal;
+  background: var(--grad-cool);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+[data-theme='classic'] :is(h1, h2) em.warm { background-image: var(--grad-warm); }
+[data-theme='classic'] .section--forest h2 em,
+[data-theme='classic'] .cta h2 em { background-image: var(--grad-warm); color: transparent; }
+[data-theme='classic'] .eyebrow { color: var(--moss); letter-spacing: 0.08em; }
+[data-theme='classic'] .eyebrow::before { display: none; }
+[data-theme='classic'] .btn--ghost { background: transparent; color: var(--forest); border-color: var(--line); }
+[data-theme='classic'] .btn--ghost:hover { background: var(--linen); color: var(--forest); border-color: var(--sage); }
+[data-theme='classic'] .btn--honey { background: var(--honey); border-color: var(--honey); color: var(--forest); }
+[data-theme='classic'] .card { border-color: var(--line); box-shadow: var(--shadow); }
+[data-theme='classic'] .card .icon { background: var(--linen); color: var(--moss); }

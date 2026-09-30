@@ -24,12 +24,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Preview copy: served under /wonderfill-website and kept out of search results
-      # (canonical URLs still point to www.wonderfill.ch).
+      # Preview copies, kept out of search results (canonical URLs still point to www.wonderfill.ch).
+      # Natur design at /wonderfill-website, classic design at /wonderfill-website/klassisch.
       - run: npm run build
         env:
           BASE_PATH: /wonderfill-website
           PUBLIC_NOINDEX: 'true'
+          PUBLIC_PREVIEW_ROOT: /wonderfill-website
+      - run: npx astro build --outDir dist/klassisch
+        env:
+          BASE_PATH: /wonderfill-website/klassisch
+          PUBLIC_THEME: classic
+          PUBLIC_NOINDEX: 'true'
+          PUBLIC_PREVIEW_ROOT: /wonderfill-website
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

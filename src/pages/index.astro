@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
 import Botanical from '../components/Botanical.astro';
-import { SITE, u, PARTNERS, FLAVORS, MORE_FLAVORS } from '../data/site.js';
+import { SITE, u, THEME, PARTNERS, FLAVORS, MORE_FLAVORS } from '../data/site.js';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -27,7 +27,9 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
     <div class="wrap grid grid-2">
       <div>
         <p class="eyebrow">Wonderfill Getränkestation</p>
-        <h1>Frisch gezapft. <em>Natürlich</em> gut.</h1>
+        {THEME === 'classic'
+          ? <h1 class="h1-classic">Die <em class="warm">innovative</em> Getränkestation für <em>funktionale</em> Getränke</h1>
+          : <h1>Frisch gezapft. <em>Natürlich</em> gut.</h1>}
         <p class="lead">
           Ersetze PET-Flaschen an deinem Standort durch funktionale Getränke aus natürlichen Zutaten –
           zuckerfrei, in der Schweiz hergestellt und genau auf deine Bedürfnisse zugeschnitten.
@@ -197,6 +199,7 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
 <style>
   .hero { padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem); }
   .hero h1 { max-width: 11ch; }
+  .hero h1.h1-classic { max-width: 14ch; font-size: clamp(2.3rem, 5vw, 3.75rem); }
   .hero-visual { position: relative; max-width: 30rem; justify-self: center; width: 100%; }
   .arch { aspect-ratio: 4 / 5; border-radius: 999px 999px var(--radius-lg) var(--radius-lg); overflow: hidden; background: linear-gradient(160deg, var(--sage), var(--moss)); box-shadow: var(--shadow); }
   .arch img { width: 100%; height: 100%; object-fit: cover; }
@@ -258,5 +261,5 @@ const chips = ['Bio-Zitrone', 'Ingwer', 'Holunderblüte', 'Hibiskus', 'Mate'];
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 2rem; margin: 3.5rem 0 0; position: relative; }
   .stats div { border-top: 1px solid rgb(246 240 228 / 0.25); padding-top: 1.25rem; }
   .stats dt { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1; color: var(--honey); }
-  .stats dd { margin: 0.6rem 0 0; color: #d5d9c7; }
+  .stats dd { margin: 0.6rem 0 0; color: var(--on-dark-soft); }
 </style>

@@ -38,7 +38,7 @@ const path = stripBase(Astro.url.pathname.replace(/\.html$/, ''));
   .announce { background: var(--forest); text-align: center; font-size: 0.875rem; padding: 0.5rem 1rem; }
   .announce a { color: var(--cream); text-decoration: none; }
   .announce a:hover { color: var(--honey); }
-  .site-header { position: sticky; top: 0; z-index: 50; background: rgb(246 240 228 / 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgb(217 206 182 / 0.6); }
+  .site-header { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
   .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
   .bar > a { text-decoration: none; }
   nav { display: flex; align-items: center; gap: 2rem; }

@@ -9,7 +9,19 @@ npm install
 npm run dev      # http://localhost:4321
 npm run build    # static output in dist/
 npm run preview  # serve the built site
+
+npm run dev:classic    # classic design (close to the current site)
+npm run build:classic
 ```
+
+## Two designs
+
+The same pages and content ship in two themes, picked at build time with `PUBLIC_THEME`:
+
+- **natur** (default): warm forest palette, Fraunces + Inter, botanical line art
+- **classic** (`PUBLIC_THEME=classic`): the current wonderfill.ch look (Poppins, navy + teal, gradient words) with better contrast
+
+Theme tokens live in `src/styles/global.css` (`[data-theme='classic']`). The GitHub Pages preview publishes both, with a switch at the bottom of each page.
 
 ## Structure
 

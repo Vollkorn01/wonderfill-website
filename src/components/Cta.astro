@@ -21,9 +21,9 @@ const { title = 'Lust auf eine Kostprobe?', text = 'Hast du Fragen oder möchtes
   .cta { position: relative; overflow: hidden; text-align: center; background: var(--forest); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(3rem, 7vw, 5.5rem) var(--gutter); }
   .cta h2 { color: var(--cream); position: relative; }
   .cta h2 :global(em) { color: var(--honey); }
-  .cta .lead { color: #d5d9c7; margin-inline: auto; position: relative; }
+  .cta .lead { color: var(--on-dark-soft); margin-inline: auto; position: relative; }
   .btn-row { justify-content: center; position: relative; }
-  .light { color: var(--cream); border-color: rgb(246 240 228 / 0.5); }
+  .light { color: var(--cream); border-color: color-mix(in srgb, var(--cream), transparent 50%); }
   .light:hover { background: var(--cream); color: var(--forest); border-color: var(--cream); }
   .cta :global(.sprig) { position: absolute; width: 7rem; color: var(--moss); opacity: 0.55; bottom: -1rem; }
   .cta :global(.sprig.l) { left: 3%; transform: rotate(-14deg); }
